@@ -1,0 +1,60 @@
+GET http://localhost:5025/routes
+
+###
+GET http://localhost:5025/boulders
+
+###
+GET http://localhost:5025/routes/5
+
+###
+GET http://localhost:5025/boulders/1
+
+###
+POST http://localhost:5025/routes
+Content-Type: application/json
+
+{
+    "wallNumber": 1,
+    "color": "yellow",
+    "grade": "5.9",
+    "setDate": "2026-12-12"
+}
+
+###
+POST http://localhost:5025/boulders
+Content-Type: application/json
+
+{
+    "sectionNumber": 1,
+    "color": "yellow",
+    "grade": "V2",
+    "setDate": "2026-12-12"
+}
+
+###
+PUT http://localhost:5025/routes/2
+Content-Type: application/json
+
+{
+    "wallNumber": 1,
+    "color": "red",
+    "grade": "5.11",
+    "setDate": "2026-01-01"
+}
+
+###
+PUT http://localhost:5025/boulders/1
+Content-Type: application/json
+
+{
+    "sectionNumber": 2,
+    "color": "yellow",
+    "grade": "V2",
+    "setDate": "2026-12-12"
+}
+
+###
+DELETE http://localhost:5025/boulders/1
+
+###
+DELETE http://localhost:5025/routes/1

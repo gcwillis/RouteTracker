@@ -1,0 +1,11 @@
+using System.ComponentModel.DataAnnotations;
+
+namespace RouteTracker.Api.Dtos;
+
+public record RouteDto(
+    [Required] int Id,
+    [Required][Range(1, 52)] int WallNumber,
+    [Required] string Color,
+    string Grade,
+    DateOnly SetDate
+);
