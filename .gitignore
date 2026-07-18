@@ -3,10 +3,10 @@
 ##
 ## Get latest from `dotnet new gitignore`
 
-.db
+*.db
 appsettings.Development.json
 appsettings.Local.json
-.http
+EndpointTest.http
 
 
 # dotenv files
