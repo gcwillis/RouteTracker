@@ -1,3 +1,4 @@
+
 using RouteTracker.Api.Data;
 using RouteTracker.Api.Endpoints;
 
@@ -12,5 +13,7 @@ var app = builder.Build();
 
 app.MapRouteEndpoints();
 app.MapBoulderEndpoints();
+
+app.MigrateDb();
 
 app.Run();
