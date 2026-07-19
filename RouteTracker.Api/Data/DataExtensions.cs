@@ -15,7 +15,7 @@ public static class DataExtensions
 
     public static void AddRouteTrackerDb(this WebApplicationBuilder builder)
     {
-        var connectionString = "Data Source=RouteTracker.db";
+        var connectionString = builder.Configuration.GetConnectionString("RouteTracker");
         builder.Services.AddSqlite<RouteTrackerContext>(
             connectionString,
             optionsAction: options => options.UseSeeding((context, _) =>
