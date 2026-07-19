@@ -107,8 +107,9 @@ namespace RouteTracker.Api.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Grade")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("GradeValue")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 

@@ -11,7 +11,7 @@ using RouteTracker.Api.Data;
 namespace RouteTracker.Api.Data.Migrations
 {
     [DbContext(typeof(RouteTrackerContext))]
-    [Migration("20260718180257_InitialCreate")]
+    [Migration("20260719034337_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -110,8 +110,9 @@ namespace RouteTracker.Api.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Grade")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("GradeValue")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 

@@ -43,7 +43,7 @@ namespace RouteTracker.Api.Data.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Grade = table.Column<int>(type: "INTEGER", nullable: false)
+                    GradeValue = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {

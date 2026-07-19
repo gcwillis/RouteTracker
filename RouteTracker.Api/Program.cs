@@ -5,9 +5,7 @@ using RouteTracker.Api.Endpoints;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddValidation();
-
-var connectionString = "Data Source=RouteTracker.db";
-builder.Services.AddSqlite<RouteTrackerContext>(connectionString);
+builder.AddRouteTrackerDb();
 
 var app = builder.Build();
 

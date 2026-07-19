@@ -4,5 +4,5 @@ public class VermGrade
 {
     public int Id { get; set; }
 
-    public required int Grade { get; set; }
+    public required string GradeValue { get; set; }
 }
