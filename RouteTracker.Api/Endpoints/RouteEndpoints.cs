@@ -1,78 +1,109 @@
+using Microsoft.EntityFrameworkCore;
+using RouteTracker.Api.Data;
 using RouteTracker.Api.Dtos;
+
 namespace RouteTracker.Api.Endpoints;
 
 public static class RouteEndpoints
 {
     const string GetById = "GetRouteById";
-    private static readonly List<RouteDto> routes = [
-        new (1, 1, "Red", "5.11", new DateOnly(2026, 1, 1))
-    ];
 
     public static void MapRouteEndpoints(this WebApplication app)
     {
         var group = app.MapGroup("/routes");
 
-        group.MapPost("/", (CreateRouteDto newRoute) =>
+        group.MapPost("/", async (CreateRouteDto newRoute, RouteTrackerContext dbContext) =>
         {
-            RouteDto route = new(
-                routes.Count + 1,
-                newRoute.WallNumber,
-                newRoute.Color,
-                newRoute.Grade,
-                newRoute.SetDate
+            Models.Route route = new()
+            {
+                WallNumber = newRoute.WallNumber,
+                ColorId = newRoute.ColorId,
+                DecimalGradeId = newRoute.DecimalGradeId,
+                SetDate = newRoute.SetDate
+            };
+
+            dbContext.Routes.Add(route);
+            await dbContext.SaveChangesAsync();
+
+            RouteDetailsDto routeDto = new(
+                route.Id,
+                route.WallNumber,
+                route.ColorId,
+                route.DecimalGradeId,
+                route.SetDate
             );
 
-            routes.Add(route);
-
-            return Results.CreatedAtRoute(GetById, new {id = route.Id}, route);
+            return Results.CreatedAtRoute(GetById, new {id = routeDto.Id}, routeDto);
         });
 
-        group.MapGet("/", () => routes);
-
-        group.MapGet("/{id}", (int id) =>
+        group.MapGet("/", async (RouteTrackerContext dbContext) =>
         {
-            var res = routes.Find(route => route.Id == id);
-            return res is null ? Results.NotFound() : Results.Ok(res);
+            await dbContext.Routes.ToListAsync();
+        });
+
+        group.MapGet("/{id}", async (int id, RouteTrackerContext dbContext) =>
+        {
+            var route = await dbContext.Routes.FindAsync(id);
+
+            return route is null ? Results.NotFound() : Results.Ok(
+                new RouteDetailsDto(
+                    route.Id,
+                    route.WallNumber,
+                    route.ColorId,
+                    route.DecimalGradeId,
+                    route.SetDate
+                )
+            );
         })
         .WithName(GetById);
 
-        group.MapPut("/{id}", (int id, RouteDto modifiedRoute) =>
+        group.MapPut("/{id}", async (int id, CreateRouteDto modifiedRoute, RouteTrackerContext dbContext) =>
         {
-            var res = routes.Find(route => route.Id == id);
-            if (res == null)
+            var route = await dbContext.Routes.FindAsync(id);
+            if (route == null)
             {
-                RouteDto route = new(
-                    routes.Count + 1,
-                    modifiedRoute.WallNumber,
-                    modifiedRoute.Color,
-                    modifiedRoute.Grade,
-                    modifiedRoute.SetDate
+                Models.Route newRoute = new()
+                {
+                    WallNumber = modifiedRoute.WallNumber,
+                    ColorId = modifiedRoute.ColorId,
+                    DecimalGradeId = modifiedRoute.DecimalGradeId,
+                    SetDate = modifiedRoute.SetDate
+                };
+                dbContext.Routes.Add(newRoute);
+                await dbContext.SaveChangesAsync();
+
+                RouteDetailsDto routeDto = new(
+                    newRoute.Id,
+                    newRoute.WallNumber,
+                    newRoute.ColorId,
+                    newRoute.DecimalGradeId,
+                    newRoute.SetDate
                 );
-                routes.Add(route);
-                return Results.CreatedAtRoute(GetById, new {id = modifiedRoute.Id}, modifiedRoute);
+                
+                return Results.CreatedAtRoute(GetById, new {id = routeDto.Id}, routeDto);
             } else
             {
-                routes[routes.IndexOf(res)] = new RouteDto(
-                    res.Id,
-                    modifiedRoute.WallNumber,
-                    modifiedRoute.Color,
-                    modifiedRoute.Grade,
-                    modifiedRoute.SetDate
-                );
+                route.WallNumber = modifiedRoute.WallNumber;
+                route.ColorId = route.ColorId;
+                route.DecimalGradeId = modifiedRoute.DecimalGradeId;
+                route.SetDate = modifiedRoute.SetDate;
+
+                await dbContext.SaveChangesAsync();
                 return Results.NoContent();
 
             }
         });
 
-        group.MapDelete("/{id}", (int id) =>
+        group.MapDelete("/{id}", async (int id, RouteTrackerContext dbContext) =>
         {
-            var res = routes.Find(route => id == route.Id);
-            if (res == null)
+            var route = await dbContext.Routes.FindAsync(id);
+            if (route == null)
             {
                 return Results.NotFound();
             } else
             {
-                routes.Remove(res);
+                dbContext.Routes.Remove(route);
+                dbContext.SaveChanges();
                 return Results.NoContent();
             }
         });

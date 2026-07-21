@@ -1,4 +1,3 @@
-
 using RouteTracker.Api.Data;
 using RouteTracker.Api.Endpoints;
 

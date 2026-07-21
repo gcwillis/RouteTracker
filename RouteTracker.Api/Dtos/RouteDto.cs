@@ -5,7 +5,7 @@ namespace RouteTracker.Api.Dtos;
 public record RouteDto(
     [Required] int Id,
     [Required][Range(1, 52)] int WallNumber,
-    [Required] string Color,
-    string Grade,
+    [Required] int ColorId,
+    int DecimalGradeId,
     DateOnly SetDate
 );

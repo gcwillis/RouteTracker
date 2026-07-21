@@ -5,7 +5,7 @@ namespace RouteTracker.Api.Dtos;
 public record BoulderDto(
     [Required] int Id,
     [Required][Range(1, 4)] int SectionNumber,
-    [Required] string Color,
-    string Grade,
+    [Required] int ColorId,
+    int VermGradeId,
     DateOnly SetDate
 );
