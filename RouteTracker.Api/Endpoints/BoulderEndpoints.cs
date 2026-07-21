@@ -39,7 +39,8 @@ public static class BoulderEndpoints
 
         group.MapGet("/", async (RouteTrackerContext dbContext) =>
         {
-            return await dbContext.Boulders.ToListAsync();
+            var list = await dbContext.Boulders.ToListAsync();
+            return Results.Ok(list);
         });
 
         group.MapGet("/{id}", async (int id, RouteTrackerContext dbContext) =>

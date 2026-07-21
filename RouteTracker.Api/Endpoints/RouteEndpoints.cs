@@ -38,7 +38,8 @@ public static class RouteEndpoints
 
         group.MapGet("/", async (RouteTrackerContext dbContext) =>
         {
-            await dbContext.Routes.ToListAsync();
+            var list = await dbContext.Routes.ToListAsync();
+            return Results.Ok(list);
         });
 
         group.MapGet("/{id}", async (int id, RouteTrackerContext dbContext) =>
@@ -84,7 +85,7 @@ public static class RouteEndpoints
             } else
             {
                 route.WallNumber = modifiedRoute.WallNumber;
-                route.ColorId = route.ColorId;
+                route.ColorId = modifiedRoute.ColorId;
                 route.DecimalGradeId = modifiedRoute.DecimalGradeId;
                 route.SetDate = modifiedRoute.SetDate;
 
