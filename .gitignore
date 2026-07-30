@@ -9,6 +9,9 @@
 appsettings.Development.json
 appsettings.Local.json
 EndpointTest.http
+dist/
+node_modules/
+
 
 
 # dotenv files
