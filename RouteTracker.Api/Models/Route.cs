@@ -18,4 +18,8 @@ public class Route
     public int DecimalGradeId { get; set;}
 
     public DateOnly? SetDate { get; set; }
+
+    public string? Setter { get; set; }
+    
+    public int SetterId { get; set ; }
 }

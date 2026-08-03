@@ -15,4 +15,6 @@ public class RouteTrackerContext(DbContextOptions<RouteTrackerContext> options)
     public DbSet<DecimalGrade> DecimalGrades => Set<DecimalGrade>();
 
     public DbSet<VermGrade> VermGrades => Set<VermGrade>();
+
+    public DbSet<Setter> Setters => Set<Setter>();
 }

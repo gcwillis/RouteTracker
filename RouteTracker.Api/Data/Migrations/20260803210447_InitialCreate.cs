@@ -17,7 +17,8 @@ namespace RouteTracker.Api.Data.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    ColorName = table.Column<string>(type: "TEXT", nullable: false)
+                    ColorName = table.Column<string>(type: "TEXT", nullable: false),
+                    HexCode = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -35,6 +36,19 @@ namespace RouteTracker.Api.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DecimalGrades", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Setters",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Setters", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -59,7 +73,9 @@ namespace RouteTracker.Api.Data.Migrations
                     WallNumber = table.Column<int>(type: "INTEGER", nullable: false),
                     ColorId = table.Column<int>(type: "INTEGER", nullable: false),
                     DecimalGradeId = table.Column<int>(type: "INTEGER", nullable: false),
-                    SetDate = table.Column<DateOnly>(type: "TEXT", nullable: true)
+                    SetDate = table.Column<DateOnly>(type: "TEXT", nullable: true),
+                    Setter = table.Column<string>(type: "TEXT", nullable: true),
+                    SetterId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -87,7 +103,8 @@ namespace RouteTracker.Api.Data.Migrations
                     SectionNumber = table.Column<int>(type: "INTEGER", nullable: false),
                     ColorId = table.Column<int>(type: "INTEGER", nullable: false),
                     VermGradeId = table.Column<int>(type: "INTEGER", nullable: false),
-                    SetDate = table.Column<DateOnly>(type: "TEXT", nullable: true)
+                    SetDate = table.Column<DateOnly>(type: "TEXT", nullable: true),
+                    Setter = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -135,6 +152,9 @@ namespace RouteTracker.Api.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Routes");
+
+            migrationBuilder.DropTable(
+                name: "Setters");
 
             migrationBuilder.DropTable(
                 name: "VermGrades");

@@ -32,6 +32,9 @@ namespace RouteTracker.Api.Data.Migrations
                     b.Property<DateOnly?>("SetDate")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Setter")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("VermGradeId")
                         .HasColumnType("INTEGER");
 
@@ -51,6 +54,10 @@ namespace RouteTracker.Api.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ColorName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("HexCode")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -89,6 +96,12 @@ namespace RouteTracker.Api.Data.Migrations
                     b.Property<DateOnly?>("SetDate")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Setter")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("SetterId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("WallNumber")
                         .HasColumnType("INTEGER");
 
@@ -99,6 +112,21 @@ namespace RouteTracker.Api.Data.Migrations
                     b.HasIndex("DecimalGradeId");
 
                     b.ToTable("Routes");
+                });
+
+            modelBuilder.Entity("RouteTracker.Api.Models.Setter", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Setters");
                 });
 
             modelBuilder.Entity("RouteTracker.Api.Models.VermGrade", b =>

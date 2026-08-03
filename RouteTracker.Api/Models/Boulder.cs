@@ -18,4 +18,6 @@ public class Boulder
     public int VermGradeId { get; set; }
 
     public DateOnly? SetDate { get; set; }
+
+    public string? Setter { get; set; }
 }
