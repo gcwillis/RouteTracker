@@ -1,10 +1,4 @@
-type TileProps = {
-    grade: string
-    color: string
-    date: string
-    setter: string
-    location: string
-}
+import type { TileProps } from "../utils/types"
 
 function RouteTile(props: TileProps) {
     return (
