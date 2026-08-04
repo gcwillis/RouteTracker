@@ -6,7 +6,7 @@ import RouteTile from "./RouteTile"
 function TileContainer() {
     const [colors, setColors] = useState<Color[]>([])
     const [routes, setRoutes] = useState<Route[]>([])
-    // const [decimalGrades, setDecimalGrades] = useState<DecimalGrade[]>([])
+    const [decimalGrades, setDecimalGrades] = useState<DecimalGrade[]>([])
     // const [boulders, setBoulders] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
@@ -16,7 +16,7 @@ function TileContainer() {
             try {
                 setRoutes(await getRoutes())
                 setColors(await getColors())
-                //setDecimalGrades(await getDecimalGrades())
+                setDecimalGrades(await getDecimalGrades())
             } catch (error) {
                 if (error instanceof Error) {
                     setError(error.message)
@@ -31,16 +31,17 @@ function TileContainer() {
     if (loading) return<p>Loading</p>
     if (error) return <p>{error}</p>
 
+    console.log(decimalGrades)
+
     return (
         <div
-            className="grid grid-cols-3 ml-auto mr-auto w-fit"
+            className="grid grid-cols-1 ml-auto mr-auto w-fit"
             style={{}}>
             
             {routes.map((route) => (
                 <RouteTile 
                 key={route.id} 
-                //grade={decimalGrades[route.decimalGradeId].value} 
-                grade={""}
+                grade={decimalGrades[route.decimalGradeId].gradeValue} 
                 color={colors[route.colorId].hexCode}
                 date={route.setDate} 
                 setter={""}

@@ -35,10 +35,10 @@ export interface Color {
 
 export interface DecimalGrade {
     id: number
-    value: string
+    gradeValue: string
 } 
 
 export interface VermGrade {
     id: number
-    value: string
+    gradeValue: string
 }

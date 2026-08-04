@@ -11,6 +11,7 @@ var app = builder.Build();
 app.MapRouteEndpoints();
 app.MapBoulderEndpoints();
 app.MapColorEndpoints();
+app.MapDecimalGradeEndpoints();
 
 app.MigrateDb();
 
