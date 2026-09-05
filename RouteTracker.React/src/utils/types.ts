@@ -6,6 +6,7 @@ export interface Route {
     decimalGrade: DecimalGrade;
     decimalGradeId: number;
     setDate: string;
+    setterId: number;
 }
 
 export interface Boulder {
@@ -41,4 +42,14 @@ export interface DecimalGrade {
 export interface VermGrade {
     id: number
     gradeValue: string
+}
+
+export interface Setter {
+    id: number
+    name: string
+}
+
+export type DropdownOption = {
+    value: number
+    label: string
 }

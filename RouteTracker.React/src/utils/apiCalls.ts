@@ -1,4 +1,4 @@
-import type { Route, Boulder, Color, DecimalGrade, VermGrade } from "./types.ts"
+import type { Route, Boulder, Color, DecimalGrade, VermGrade, Setter } from "./types.ts"
 
 export async function getRoutes(): Promise<Route[]> {
     const res = await fetch("/api/routes")
@@ -42,5 +42,14 @@ export async function getVermGrades(): Promise<VermGrade[]> {
         throw new Error("error")
     } else {
         return await res.json() as VermGrade[]
+    }
+}
+
+export async function getSetters(): Promise<Setter[]> {
+    const res = await fetch("/api/setters")
+    if (!res.ok) {
+        throw new Error("failed to retrive setters")
+    } else {
+        return await res.json() as Setter[]
     }
 }

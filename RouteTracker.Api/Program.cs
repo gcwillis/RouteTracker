@@ -12,6 +12,7 @@ app.MapRouteEndpoints();
 app.MapBoulderEndpoints();
 app.MapColorEndpoints();
 app.MapDecimalGradeEndpoints();
+app.MapSetterEndpoints();
 
 app.MigrateDb();
 
