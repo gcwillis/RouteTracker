@@ -9,7 +9,6 @@ public static class ColorEndpoints
     {
         var group = app.MapGroup("/colors");
 
-
         group.MapGet("/", async (RouteTrackerContext dbContext) =>
         {
             var list = await dbContext.Colors.ToListAsync();
