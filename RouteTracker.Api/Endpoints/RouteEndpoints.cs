@@ -19,6 +19,7 @@ public static class RouteEndpoints
                 WallNumber = newRoute.WallNumber,
                 ColorId = newRoute.ColorId,
                 DecimalGradeId = newRoute.DecimalGradeId,
+                SetterId = newRoute.SetterId,
                 SetDate = newRoute.SetDate
             };
 
@@ -68,6 +69,7 @@ public static class RouteEndpoints
                     WallNumber = modifiedRoute.WallNumber,
                     ColorId = modifiedRoute.ColorId,
                     DecimalGradeId = modifiedRoute.DecimalGradeId,
+                    SetterId = modifiedRoute.SetterId,
                     SetDate = modifiedRoute.SetDate
                 };
                 dbContext.Routes.Add(newRoute);
@@ -87,6 +89,7 @@ public static class RouteEndpoints
                 route.WallNumber = modifiedRoute.WallNumber;
                 route.ColorId = modifiedRoute.ColorId;
                 route.DecimalGradeId = modifiedRoute.DecimalGradeId;
+                route.SetterId = modifiedRoute.SetterId;
                 route.SetDate = modifiedRoute.SetDate;
 
                 await dbContext.SaveChangesAsync();

@@ -6,5 +6,6 @@ public record CreateRouteDto(
     [Required][Range(1, 52)] int WallNumber,
     [Required] int ColorId,
     int DecimalGradeId,
+    int SetterId,
     DateOnly SetDate
 );
