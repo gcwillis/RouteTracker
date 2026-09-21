@@ -11,6 +11,7 @@ function HomePage() {
     const [routes, setRoutes] = useState<Route[]>([])
     const [decimalGrades, setDecimalGrades] = useState<DecimalGrade[]>([])
     const [setters, setSetters] = useState<Setter[]>([])
+    const [isCreateRouteOpen, setIsCreateRouteOpen] = useState(false)
     // const [boulders, setBoulders] = useState([])
     // const [vermGrades, setVermGrades] = useState([])
     const [loading, setLoading] = useState(true)
@@ -34,17 +35,36 @@ function HomePage() {
         loadRoutes()
     }, []);
 
+    async function handleRouteCreated() {
+        setIsCreateRouteOpen(false)
+        try {
+            setRoutes(await getRoutes())
+        } catch (error) {
+            if (error instanceof Error) {
+                setError(error.message)
+            } else {
+                setError("an error occurred")
+            }
+        }
+    }
+
     if (loading) return<p>Loading</p>
     if (error) return <p>{error}</p>
 
     return (
         <>
-            <NavBar></NavBar>
-            <CreateRoute 
-                colors={colors} 
-                grades={decimalGrades}
-                setters={setters}
-            ></CreateRoute>
+            <NavBar
+                isCreateRouteOpen={isCreateRouteOpen}
+                onToggleCreateRoute={() => setIsCreateRouteOpen((isOpen) => !isOpen)}
+            ></NavBar>
+            {isCreateRouteOpen ? (
+                <CreateRoute
+                    colors={colors}
+                    grades={decimalGrades}
+                    setters={setters}
+                    onRouteCreated={handleRouteCreated}
+                ></CreateRoute>
+            ) : null}
             <TileContainer
                 routes={routes}
                 colors={colors}

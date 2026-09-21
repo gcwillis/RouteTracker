@@ -1,5 +1,13 @@
 import type { Route, Boulder, Color, DecimalGrade, VermGrade, Setter } from "./types.ts"
 
+export type CreateRouteRequest = {
+    wallNumber: number
+    colorId: number
+    decimalGradeId: number
+    setterId: number
+    setDate: string
+}
+
 export async function getRoutes(): Promise<Route[]> {
     const res = await fetch("/api/routes")
     if (!res.ok) {
@@ -52,4 +60,18 @@ export async function getSetters(): Promise<Setter[]> {
     } else {
         return await res.json() as Setter[]
     }
+}
+
+export async function createRoute(route: CreateRouteRequest): Promise<Route> {
+    const res = await fetch("/api/routes/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(route)
+    })
+
+    if (!res.ok) {
+        throw new Error("failed to create route")
+    }
+
+    return await res.json() as Route
 }
