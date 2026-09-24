@@ -20,7 +20,11 @@ export interface Boulder {
 }
 
 export type TileProps = {
-    key: number
+    id: number
+    wallNumber: number
+    colorId: number
+    decimalGradeId: number
+    setterId: number
     grade: string
     color: string
     date: string
@@ -30,7 +34,7 @@ export type TileProps = {
 
 export interface Color {
     id: number
-    name: string
+    colorName: string
     hexCode: string
 }
 

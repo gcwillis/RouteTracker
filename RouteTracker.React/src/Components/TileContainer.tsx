@@ -6,6 +6,7 @@ type TileContainerProps = {
     colors: Color[]
     grades: DecimalGrade[]
     setters: Setter[]
+    onRouteChanged: () => Promise<void>
 }
 
 function TileContainer(props: TileContainerProps) {
@@ -26,7 +27,16 @@ function TileContainer(props: TileContainerProps) {
                         color={color?.hexCode ?? "transparent"}
                         date={route.setDate}
                         setter={setter?.name ?? "Unknown"}
-                        location={"line " + route.wallNumber}>
+                        location={"line " + route.wallNumber}
+                        id={route.id}
+                        wallNumber={route.wallNumber}
+                        colorId={route.colorId}
+                        decimalGradeId={route.decimalGradeId}
+                        setterId={route.setterId}
+                        colors={props.colors}
+                        grades={props.grades}
+                        setters={props.setters}
+                        onRouteChanged={props.onRouteChanged}>
                     </RouteTile>
                 )
             })}

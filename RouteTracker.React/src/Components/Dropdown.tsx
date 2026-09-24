@@ -40,7 +40,7 @@ export default function Dropdown({
   }
 
   return (
-    <div className={`relative inline-block ${className}`}>
+    <div className={`relative inline-block ${open ? "z-50" : "z-0"} ${className}`}>
       {label ? <div className="mb-1 text-sm text-gray-200">{label}</div> : null}
       <div ref={ref} className="inline-block rounded-sm">
         <button
@@ -61,7 +61,7 @@ export default function Dropdown({
           <ul
             role="listbox"
             aria-label={label ?? name}
-            className="absolute mt-2 w-25 max-h-48 overflow-auto rounded-md bg-gray-800 border border-gray-700 shadow-lg z-50 divide-y divide-gray-700"
+            className="absolute z-100 mt-2 w-25 max-h-48 overflow-auto rounded-md border border-gray-700 bg-gray-800 shadow-lg divide-y divide-gray-700"
           >
             {options.length === 0 ? (
               <li className="p-2 text-sm text-gray-400">No options</li>

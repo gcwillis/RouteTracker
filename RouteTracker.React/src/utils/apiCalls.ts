@@ -75,3 +75,25 @@ export async function createRoute(route: CreateRouteRequest): Promise<Route> {
 
     return await res.json() as Route
 }
+
+export async function updateRoute(id: number, route: CreateRouteRequest): Promise<void> {
+    const res = await fetch(`/api/routes/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(route)
+    })
+
+    if (!res.ok) {
+        throw new Error("failed to update route")
+    }
+}
+
+export async function deleteRoute(id: number): Promise<void> {
+    const res = await fetch(`/api/routes/${id}`, {
+        method: "DELETE"
+    })
+
+    if (!res.ok) {
+        throw new Error("failed to delete route")
+    }
+}

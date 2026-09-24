@@ -70,6 +70,7 @@ function HomePage() {
                 colors={colors}
                 grades={decimalGrades}
                 setters={setters}
+                onRouteChanged={handleRouteCreated}
             ></TileContainer>
         </>
     )
