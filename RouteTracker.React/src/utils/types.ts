@@ -11,12 +11,13 @@ export interface Route {
 
 export interface Boulder {
     id: number;
-    section: number;
-    color: any;
+    sectionNumber: number;
+    color: Color | null;
     colorId: number;
-    vermGrade: any;
-    verGradeId: number;
-    setDate: string;
+    vermGrade: VermGrade | null;
+    vermGradeId: number;
+    setDate: string | null;
+    setter: string | null;
 }
 
 export type TileProps = {

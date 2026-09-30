@@ -23,7 +23,7 @@ function CreateRoute(props: CreateProps) {
 
     const colorOptions: DropdownOption[] = props.colors.map((color) => ({
         value: color.id,
-        label: (color as any).name ?? (color as any).colorName ?? (color as any).ColorName ?? String((color as any).id)
+        label: color.colorName
     }))
     const gradeOptions: DropdownOption[] = props.grades.map((grade) => ({
         value: grade.id,
