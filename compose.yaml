@@ -1,0 +1,14 @@
+version: ''
+services:
+  web:
+    build: ./RouteTracker.React
+    ports:
+      - 80:80
+  api:
+    build: ./RouteTracker.Api
+    ports:
+      - 8080:8080
+    volumes:
+      - data:/data
+volumes:
+  data:
